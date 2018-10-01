@@ -9,6 +9,7 @@ class Shibe(animal: Animal) {
 	private var https = true
 
 	fun setCount(count: Int): Shibe {
+		if (count < 1 || count > 100) throw ShibeException("Count cannot be less than 1 or exceed 100")
 		this.count = count
 		return this
 	}
