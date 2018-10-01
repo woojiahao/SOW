@@ -9,20 +9,21 @@ import kotlin.test.assertTrue
 class ShibeTest {
 	@Test(expected = ShibeException::class)
 	fun count_below_1_throws_exception() {
-		Shibe(Animal.Shibe).setCount(1000)
+		Shibe().setCount(1000)
 	}
 
 	@Test(expected = ShibeException::class)
 	fun count_above_100_throws_exception() {
-		Shibe(Animal.Cat).setCount(-1)
+		Shibe().setAnimal(Animal.Cat).setCount(-1)
 	}
 
 	@Test fun api_should_retrieve_right_amount() {
-		assertEquals(5, Shibe(Animal.Bird).setCount(5).retrieve().size)
+		assertEquals(5, Shibe().setAnimal(Animal.Bird).setCount(5).retrieve().size)
 	}
 
 	@Test fun disabling_urls_should_return_image_id_only() {
-		Shibe(Animal.Bird)
+		Shibe()
+			.setAnimal(Animal.Bird)
 			.setCount(10)
 			.setUrl(false)
 			.retrieve()
@@ -31,7 +32,8 @@ class ShibeTest {
 	}
 
 	@Test fun disabling_https_should_return_http_urls_only() {
-		Shibe(Animal.Cat)
+		Shibe()
+			.setAnimal(Animal.Cat)
 			.setCount(15)
 			.setHttps(false)
 			.retrieve()
